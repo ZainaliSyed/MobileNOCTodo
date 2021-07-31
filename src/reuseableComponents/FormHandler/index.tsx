@@ -50,10 +50,13 @@ class Form extends Component {
     return data;
   };
 
-  clearInputs = () =>
-    this.childReferences.forEach(
-      inputRef => inputRef.clearInput && inputRef.clearInput(),
-    );
+  clearInputs = () => {
+    let data = {};
+    this.childReferences.forEach((item, index) => {
+      data[this.childDetails[index].identifier] = item.clearValue();
+    });
+    return data;
+  };
 
   onSubmitForm = () => {
     return this.checkValidation() ? this.getValues() : undefined;

@@ -1,23 +1,23 @@
 import * as actionTypes from './actionTypes';
 
-export function addArticle(article: IArticle) {
-  const action: ArticleAction = {
-    type: actionTypes.ADD_ARTICLE,
-    article,
+export function addTodo(todo: ITodo) {
+  const action: TodoAction = {
+    type: actionTypes.ADD_TODO,
+    todo,
   };
 
   return simulateHttpRequest(action);
 }
 
-export function removeArticle(article: IArticle) {
-  const action: ArticleAction = {
-    type: actionTypes.REMOVE_ARTICLE,
-    article,
+export function removeTodoItem(todo: ITodo) {
+  const action: TodoAction = {
+    type: actionTypes.REMOVE_TODO,
+    todo,
   };
   return simulateHttpRequest(action);
 }
 
-export function simulateHttpRequest(action: ArticleAction) {
+export function simulateHttpRequest(action: TodoAction) {
   return (dispatch: DispatchType) => {
     setTimeout(() => {
       dispatch(action);

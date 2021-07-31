@@ -54,7 +54,7 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
     rightIcon: null,
     rightText: '',
     value: '',
-    labelBackgroundColor: '#fff',
+    labelBackgroundColor: 'transparent',
     activeTextColor: 'goldenrod',
     inactiveColor: '#aaa',
     activeColor: '#000',
@@ -174,6 +174,8 @@ export default class MaterialTextField extends Component<PropsType, StateType> {
   };
 
   getValue = () => this.state.val;
+
+  clearValue = () => this.setState({val: ''});
 
   componentIcon = () => {
     if (this.props.rightIcon || this.state.expanded) {

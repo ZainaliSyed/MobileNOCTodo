@@ -9,18 +9,19 @@ import {
 
 const windowWidth = Dimensions.get('window').width;
 type Props = {
-  saveArticle: (article: IArticle | any) => void;
+  saveTodo: (todo: ITodo | any) => void;
 };
 
-export const AddArticle: React.FC<Props> = ({saveArticle}) => {
+export const AddNocTodo: React.FC<Props> = ({saveTodo}) => {
   const formHandler = useRef(null);
 
-  const addNewArticle = () => {
+  const addNewTodo = () => {
     const payload = formHandler.current.onSubmitForm();
     let isValid = formHandler.current.checkValidation();
+    formHandler.current.clearInputs();
     if (isValid) {
       payload['id'] = Math.round(Math.random() * 999999);
-      saveArticle(payload);
+      saveTodo(payload);
     }
   };
 
@@ -47,7 +48,7 @@ export const AddArticle: React.FC<Props> = ({saveArticle}) => {
         </FormHandler>
 
         <AppButton
-          onPress={() => addNewArticle()}
+          onPress={() => addNewTodo()}
           item={{title: 'ADD', backgroundColor: 'goldenrod'}}
         />
       </View>

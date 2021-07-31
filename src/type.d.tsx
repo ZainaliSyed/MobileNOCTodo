@@ -1,16 +1,16 @@
-interface IArticle {
+interface ITodo {
   id: number;
   title: string;
   body: string;
 }
 
-type ArticleState = {
-  articles: IArticle[];
+type TodoState = {
+  todoNoclist: ITodo[];
 };
 
-type ArticleAction = {
+type TodoAction = {
   type: string;
-  article: IArticle;
+  todo: ITodo;
 };
 
-type DispatchType = (args: ArticleAction) => ArticleAction;
+type DispatchType = (args: TodoAction) => TodoAction;

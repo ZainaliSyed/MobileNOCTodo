@@ -5,26 +5,26 @@ import {Dispatch} from 'redux';
 import {useDispatch} from 'react-redux';
 
 type Props = {
-  article: IArticle;
-  removeArticle: (article: IArticle) => void;
+  todo: ITodo;
+  removeTodoItem: (todo: ITodo) => void;
 };
 
-export const Article: React.FC<Props> = ({article, removeArticle}) => {
+export const ListNocTodo: React.FC<Props> = ({todo, removeTodoItem}) => {
   const dispatch: Dispatch<any> = useDispatch();
 
-  const deleteArticle = React.useCallback(
-    (article: IArticle) => dispatch(removeArticle(article)),
-    [dispatch, removeArticle],
+  const deleteTodoItem = React.useCallback(
+    (todo: ITodo) => dispatch(removeTodoItem(todo)),
+    [dispatch, removeTodoItem],
   );
 
   return (
     <TouchableOpacity
-      onPress={() => deleteArticle(article)}
+      onPress={() => deleteTodoItem(todo)}
       style={styles.ComponentContainer}>
       <View style={styles.ListContainer}>
         <View style={{padding: 10}}>
-          <Text style={styles.TextItem}>{article.title}</Text>
-          <Text style={styles.TextTask}> {article.body}</Text>
+          <Text style={styles.TextItem}>{todo.title}</Text>
+          <Text style={styles.TextTask}> {todo.body}</Text>
         </View>
       </View>
     </TouchableOpacity>

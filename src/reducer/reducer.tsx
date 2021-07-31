@@ -1,8 +1,8 @@
 import * as actionTypes from '../action/actionTypes';
 import _ from 'lodash';
 
-const initialState: ArticleState = {
-  articles: [
+const initialState: TodoState = {
+  todoNoclist: [
     {
       id: 1,
       title: 'post 1',
@@ -16,27 +16,27 @@ const initialState: ArticleState = {
   ],
 };
 const reducer = (
-  state: ArticleState = initialState,
-  action: ArticleAction,
-): ArticleState => {
+  state: TodoState = initialState,
+  action: TodoAction,
+): TodoState => {
   switch (action.type) {
-    case actionTypes.ADD_ARTICLE:
-      const newArticle: IArticle = {
+    case actionTypes.ADD_TODO:
+      const newTodoItem: ITodo = {
         id: Math.random(), // not really unique
-        title: action.article.title,
-        body: action.article.body,
+        title: action.todo.title,
+        body: action.todo.body,
       };
       return {
         ...state,
-        articles: _.concat(newArticle, state.articles),
+        todoNoclist: _.concat(newTodoItem, state.todoNoclist),
       };
-    case actionTypes.REMOVE_ARTICLE:
-      const updatedArticles: IArticle[] = state.articles.filter(
-        article => article.id !== action.article.id,
+    case actionTypes.REMOVE_TODO:
+      const updatedTodo: ITodo[] = state.todoNoclist.filter(
+        todo => todo.id !== action.todo.id,
       );
       return {
         ...state,
-        articles: updatedArticles,
+        todoNoclist: updatedTodo,
       };
   }
   return state;
