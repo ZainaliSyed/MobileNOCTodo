@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 import {Dispatch} from 'redux';
@@ -24,7 +24,7 @@ export const ListNocTodo: React.FC<Props> = ({todo, removeTodoItem}) => {
       <View style={styles.ListContainer}>
         <View style={{padding: 10}}>
           <Text style={styles.TextItem}>{todo.title}</Text>
-          <Text style={styles.TextTask}> {todo.body}</Text>
+          <Text style={styles.TextTask}> {todo.description}</Text>
         </View>
       </View>
     </TouchableOpacity>

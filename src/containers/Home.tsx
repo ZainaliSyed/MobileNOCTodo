@@ -1,5 +1,12 @@
 import React, {useCallback} from 'react';
-import {View, Text, SafeAreaView, FlatList, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  StyleSheet,
+  Platform,
+} from 'react-native';
 
 import {useSelector, shallowEqual, useDispatch} from 'react-redux';
 import {addTodo, removeTodoItem} from '../action/actionCreators';
@@ -27,7 +34,8 @@ const Home: React.FC = () => {
       <Text style={styles.container}>Mobile NOC Todo</Text>
       <AddNocTodo saveTodo={saveTodo} />
 
-      <SafeAreaView style={{flex: 3}}>
+      <SafeAreaView
+        style={[{flex: 3}, Platform.OS == 'android' ? {marginTop: 50} : {}]}>
         <FlatList
           data={todoNoclist}
           renderItem={renderItem}
@@ -45,5 +53,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 24,
     marginTop: 40,
+    marginBottom: 20,
   },
 });

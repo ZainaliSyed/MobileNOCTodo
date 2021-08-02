@@ -1,7 +1,7 @@
 interface ITodo {
   id: number;
   title: string;
-  body: string;
+  description: string;
 }
 
 type TodoState = {

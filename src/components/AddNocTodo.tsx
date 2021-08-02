@@ -1,11 +1,13 @@
-import React, {useRef} from 'react';
-import {View, Dimensions, SafeAreaView, StyleSheet} from 'react-native';
-
+import React, {useState} from 'react';
 import {
-  MaterialTextField,
-  FormHandler,
-  AppButton,
-} from '../reuseableComponents';
+  View,
+  Text,
+  Dimensions,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+} from 'react-native';
+import {AppButton} from '../reuseableComponents';
 
 const windowWidth = Dimensions.get('window').width;
 type Props = {
@@ -13,39 +15,48 @@ type Props = {
 };
 
 export const AddNocTodo: React.FC<Props> = ({saveTodo}) => {
-  const formHandler = useRef(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
 
   const addNewTodo = () => {
-    const payload = formHandler.current.onSubmitForm();
-    let isValid = formHandler.current.checkValidation();
-    formHandler.current.clearInputs();
-    if (isValid) {
-      payload['id'] = Math.round(Math.random() * 999999);
+    title.length <= 0 ? setTitleError(true) : setTitleError(false);
+    description.length <= 0
+      ? setDescriptionError(true)
+      : setDescriptionError(false);
+    if (!Boolean(title.length <= 0) && !Boolean(description.length <= 0)) {
+      const payload = {};
+      payload['title'] = title;
+      payload['description'] = description;
       saveTodo(payload);
+      setTitle('');
+      setDescription('');
     }
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <FormHandler ref={formHandler}>
-          <MaterialTextField
-            label={'Title'}
-            identifier="title"
-            type={'TEXT'}
-            highlight={true}
-            error="First Name is required"
-            autoCapitalize={'words'}
-          />
-          <MaterialTextField
-            label={'Description'}
-            identifier="body"
-            type={'TEXT'}
-            highlight={true}
-            error="First Name is required"
-            autoCapitalize={'words'}
-          />
-        </FormHandler>
+        <TextInput
+          style={styles.input}
+          placeholder="Type here to title !"
+          onChangeText={title => setTitle(title)}
+          defaultValue={title}
+        />
+        <Text style={styles.inputValidation}>
+          {titleError ? 'The title field is required' : ''}
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Type here to description !"
+          onChangeText={desc => setDescription(desc)}
+          defaultValue={description}
+        />
+        <Text style={styles.inputValidation}>
+          {descriptionError ? 'The description field is required' : ''}
+        </Text>
 
         <AppButton
           onPress={() => addNewTodo()}
@@ -62,5 +73,18 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     width: windowWidth - 40,
+  },
+  input: {
+    minHeight: 50,
+    borderWidth: 1,
+    padding: 10,
+    borderRadius: 7,
+    fontSize: 18,
+    color: 'goldenrod',
+  },
+  inputValidation: {
+    color: 'red',
+    marginBottom: 10,
+    paddingTop: 5,
   },
 });

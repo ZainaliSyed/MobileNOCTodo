@@ -2,18 +2,7 @@ import * as actionTypes from '../action/actionTypes';
 import _ from 'lodash';
 
 const initialState: TodoState = {
-  todoNoclist: [
-    {
-      id: 1,
-      title: 'post 1',
-      body: 'Quisque cursus, metus vitae pharetra Nam libero tempore, cum soluta nobis est eligendi',
-    },
-    {
-      id: 2,
-      title: 'post 2',
-      body: 'Harum quidem rerum facilis est et expedita distinctio quas molestias excepturi sint',
-    },
-  ],
+  todoNoclist: [],
 };
 const reducer = (
   state: TodoState = initialState,
@@ -22,9 +11,9 @@ const reducer = (
   switch (action.type) {
     case actionTypes.ADD_TODO:
       const newTodoItem: ITodo = {
-        id: Math.random(), // not really unique
+        id: Math.round(Math.random() * 999999), // not really unique
         title: action.todo.title,
-        body: action.todo.body,
+        description: action.todo.description,
       };
       return {
         ...state,
